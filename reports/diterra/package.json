@@ -1,0 +1,7 @@
+{
+  "name": "diterra-acompanhamento",
+  "private": true,
+  "description": "Deck semanal de acompanhamento de midia do Di Terra (Google Ads + Meta Ads)",
+  "scripts": { "deck": "node gera_acompanhamento.js" },
+  "dependencies": { "pptxgenjs": "^3.12.0" }
+}

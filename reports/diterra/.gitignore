@@ -1,0 +1,7 @@
+# saida de cada rodada, nao versionada
+google.json
+meta.json
+raw/
+*.pptx
+node_modules/
+package-lock.json

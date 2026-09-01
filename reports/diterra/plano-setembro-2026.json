@@ -1,0 +1,332 @@
+{
+ "total": 51000,
+ "meta": 36000,
+ "google": 15000,
+ "corp": 10000,
+ "social": 41000,
+ "casas": {
+  "Fazenda A Querência": {
+   "set": 18300,
+   "ago": 16285.689999999999
+  },
+  "Espaço Terrá": {
+   "set": 6800,
+   "ago": 5609.1
+  },
+  "Palacete Monte Alegre": {
+   "set": 6200,
+   "ago": 4088.86
+  },
+  "Casa Lucca": {
+   "set": 3800,
+   "ago": 2351.5
+  },
+  "Institucional / multi-casa": {
+   "set": 15900,
+   "ago": 13205.679999999998
+  }
+ },
+ "eventos": {
+  "Casamento": {
+   "set": 33000,
+   "ago": 26493.67
+  },
+  "Bodas": {
+   "set": 2500,
+   "ago": 2936.0
+  },
+  "Institucional": {
+   "set": 2100,
+   "ago": 2291.52
+  },
+  "Debutante": {
+   "set": 3400,
+   "ago": 2039.3999999999999
+  },
+  "Corporativo": {
+   "set": 10000,
+   "ago": 7780.24
+  }
+ },
+ "objetivos": {
+  "Conversão": {
+   "set": 48600,
+   "ago": 39518.07000000001
+  },
+  "Awareness": {
+   "set": 2400,
+   "ago": 2022.76
+  }
+ },
+ "plano": [
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | CASAMENTO | QUERÊNCIA | SP",
+   "casa": "Fazenda A Querência",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 3200,
+   "ago": 2865.19
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | QUERÊNCIA | CASAMENTO",
+   "casa": "Fazenda A Querência",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 1400,
+   "ago": 1230.37
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | BODAS | TERRÁ",
+   "casa": "Espaço Terrá",
+   "evento": "Bodas",
+   "objetivo": "Conversão",
+   "set": 800,
+   "ago": 2475.87
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | TERRÁ | INSTITUCIONAL",
+   "casa": "Espaço Terrá",
+   "evento": "Institucional",
+   "objetivo": "Conversão",
+   "set": 700,
+   "ago": 921.75
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | DEBUTANTES | TERRÁ",
+   "casa": "Espaço Terrá",
+   "evento": "Debutante",
+   "objetivo": "Conversão",
+   "set": 2300,
+   "ago": 637.56
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | CASAMENTO | TERRÁ",
+   "casa": "Espaço Terrá",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 500,
+   "ago": 393.23
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | CORPORATIVO | TERRÁ",
+   "casa": "Espaço Terrá",
+   "evento": "Corporativo",
+   "objetivo": "Conversão",
+   "set": 1000,
+   "ago": 370.6
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | PALACETE MONTE ALEGRE | INSTITUCIONAL",
+   "casa": "Palacete Monte Alegre",
+   "evento": "Institucional",
+   "objetivo": "Conversão",
+   "set": 500,
+   "ago": 500.3
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "SEARCH | CASAMENTO | CASA LUCCA (Mini Wedding)",
+   "casa": "Casa Lucca",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 900,
+   "ago": 354.66
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "Casamento - Performance Max",
+   "casa": "Institucional / multi-casa",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 800,
+   "ago": 1491.77
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "Corporativo - Performance Max",
+   "casa": "Institucional / multi-casa",
+   "evento": "Corporativo",
+   "objetivo": "Conversão",
+   "set": 1500,
+   "ago": 723.98
+  },
+  {
+   "plataforma": "Google",
+   "campanha": "YouTube | Corporativo (teste de canal)",
+   "casa": "Institucional / multi-casa",
+   "evento": "Corporativo",
+   "objetivo": "Conversão",
+   "set": 1400,
+   "ago": 0.0
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "CASAMENTOS | QUERÊNCIA | SITE",
+   "casa": "Fazenda A Querência",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 10200,
+   "ago": 7504.73
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "Social > Querência > Destination (lead form)",
+   "casa": "Fazenda A Querência",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 2600,
+   "ago": 4264.54
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "CASAMENTO | WhatsApp | Querência",
+   "casa": "Fazenda A Querência",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 900,
+   "ago": 420.86
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "CASAMENTOS | PALACETE | SITE",
+   "casa": "Palacete Monte Alegre",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 5700,
+   "ago": 3588.56
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "CASAMENTO | Mini Wedding | Casa Lucca",
+   "casa": "Casa Lucca",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 2900,
+   "ago": 1996.84
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "CASAMENTOS | TERRÁ | SITE",
+   "casa": "Espaço Terrá",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 1500,
+   "ago": 810.09
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "[Leads Ads] [Casamentos] [form]",
+   "casa": "Institucional / multi-casa",
+   "evento": "Casamento",
+   "objetivo": "Conversão",
+   "set": 2400,
+   "ago": 1572.83
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "Social > Debutantes > Leads form Meta",
+   "casa": "Institucional / multi-casa",
+   "evento": "Debutante",
+   "objetivo": "Conversão",
+   "set": 800,
+   "ago": 918.58
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "DEBUTANTES | MENSAGENS",
+   "casa": "Institucional / multi-casa",
+   "evento": "Debutante",
+   "objetivo": "Conversão",
+   "set": 300,
+   "ago": 483.26
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "BODAS | WhatsApp",
+   "casa": "Institucional / multi-casa",
+   "evento": "Bodas",
+   "objetivo": "Conversão",
+   "set": 1700,
+   "ago": 460.13
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "CORPORATIVO | WhatsApp",
+   "casa": "Institucional / multi-casa",
+   "evento": "Corporativo",
+   "objetivo": "Conversão",
+   "set": 1800,
+   "ago": 1429.41
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "Corporativo > Institucional",
+   "casa": "Institucional / multi-casa",
+   "evento": "Corporativo",
+   "objetivo": "Conversão",
+   "set": 1800,
+   "ago": 1696.26
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "CORPORATIVO | LP",
+   "casa": "Institucional / multi-casa",
+   "evento": "Corporativo",
+   "objetivo": "Conversão",
+   "set": 1000,
+   "ago": 2406.7
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "Reconhecimento de Marca | Corporativo",
+   "casa": "Institucional / multi-casa",
+   "evento": "Corporativo",
+   "objetivo": "Awareness",
+   "set": 1500,
+   "ago": 1153.29
+  },
+  {
+   "plataforma": "Meta",
+   "campanha": "[Posts] [Engajamento]",
+   "casa": "Institucional / multi-casa",
+   "evento": "Institucional",
+   "objetivo": "Awareness",
+   "set": 900,
+   "ago": 869.47
+  }
+ ],
+ "cpl_base": {
+  "Fazenda A Querência": 59.98850482315112,
+  "Palacete Monte Alegre": 74.03068376068376,
+  "Casa Lucca": 56.318481012658225,
+  "Espaço Terrá": 110.48625123639961,
+  "Institucional / multi-casa": 24.896683467741937
+ },
+ "cpl_potencial": {
+  "Fazenda A Querência": 31.54803634232122,
+  "Palacete Monte Alegre": 74.03068376068376,
+  "Casa Lucca": 56.318481012658225,
+  "Espaço Terrá": 110.48625123639961,
+  "Institucional / multi-casa": 24.896683467741937
+ },
+ "projecao_potencial": {
+  "leads": 1279,
+  "cpl": 36.91
+ },
+ "teste_youtube": 1400,
+ "projecao": {
+  "leads": 1004,
+  "cpl": 47.02,
+  "verba_conv": 47200.0,
+  "min": 853,
+  "max": 1154
+ }
+}
