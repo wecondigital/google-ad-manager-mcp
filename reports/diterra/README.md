@@ -64,13 +64,15 @@ campanha com objetivos misturados e pode esconder lead real.
 | `normaliza_meta.py` | `raw/*.json` (MCP) → `meta.json`, aplicando a regra de lead. |
 | `gera_acompanhamento.js` | `google.json` + `meta.json` + plano → PPTX. |
 | `qa_deck.py` | QA geométrico: estouro de texto, sobreposição e margem. |
+| `coleta_google_depara.py` | Teto atual de cada campanha do Google → `google_depara.json`. |
+| `gera_status.js` | Deck de status da implementação (o que já mudou nas contas, o que falta). |
 | `plano-setembro-2026.json` | O plano aprovado. Referência de verba e de CPL por casa. |
 | `tema/` | As três artes do "Tema Apresentação Wecon". |
 
-`google.json`, `meta.json`, `raw/` e os `.pptx` gerados não são versionados —
-são saída de cada rodada.
+`google.json`, `meta.json`, `google_depara.json`, `raw/` e os `.pptx` gerados não
+são versionados — são saída de cada rodada.
 
-## Os 5 slides
+## Os 5 slides do acompanhamento semanal
 
 1. **Capa** — período coberto.
 2. **O mês até aqui** — investido, leads, CPL, ritmo de verba contra o calendário
@@ -82,6 +84,21 @@ são saída de cada rodada.
 5. **Pontos de atenção** — gerados por regra, não por opinião: pacing fora de
    ±5%, CPL da semana 15% acima da referência, casa 25% acima do seu CPL base e
    campanha com gasto relevante e zero lead.
+
+## Deck de status da implementação
+
+Separado do acompanhamento semanal: mostra o que já foi alterado nas contas e o
+que falta. Útil enquanto o plano está sendo implementado.
+
+```bash
+python3 coleta_google_depara.py     # tetos atuais do Google
+node gera_status.js                 # 6 slides
+python3 qa_deck.py Implementacao-Setembro-DiTerra.pptx
+```
+
+A lista `APLICADO` no topo do `gera_status.js` é o registro manual do que já foi
+mexido no Meta — atualize-a conforme aplicar mais alterações. O `PAUSADOS` é
+derivado dela, então o número em destaque do slide 2 acompanha sozinho.
 
 ## Ao trocar de mês
 

@@ -1,6 +1,7 @@
 # saida de cada rodada, nao versionada
 google.json
 meta.json
+google_depara.json
 raw/
 *.pptx
 node_modules/
