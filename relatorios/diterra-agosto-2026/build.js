@@ -322,7 +322,7 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M, y: 3.58, w: 6.35, h: 2.92,
     barDir: 'col', barGapWidthPct: 55,
     chartColors: [SAGE, PURPLE],
-    dataLabelFormatCode: '[$-416]#,##0', showTitle: true, title: 'Leads por canal', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '#,##0', showTitle: true, title: 'Leads por canal', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 10, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: true, legendPos: 'b', legendColor: MUTED, legendFontSize: 10, legendFontFace: SANS,
     catAxisLabelColor: INK, catAxisLabelFontSize: 10.5, catAxisLabelFontFace: SANS,
@@ -338,7 +338,7 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M + 6.55, y: 3.58, w: 5.28, h: 2.92,
     barDir: 'col', barGapWidthPct: 55,
     chartColors: [SAGE, PURPLE],
-    dataLabelFormatCode: '[$-416]#,##0.00', showTitle: true, title: 'Custo por lead (R$)', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '#,##0.00', showTitle: true, title: 'Custo por lead (R$)', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 10, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: true, legendPos: 'b', legendColor: MUTED, legendFontSize: 10, legendFontFace: SANS,
     catAxisLabelColor: INK, catAxisLabelFontSize: 10.5, catAxisLabelFontFace: SANS,
@@ -391,7 +391,7 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M, y: 3.20, w: 6.9, h: 3.20,
     barDir: 'col', barGapWidthPct: 60,
     chartColors: [SAGE, PURPLE],
-    dataLabelFormatCode: '[$-416]#,##0', showTitle: true, title: 'Leads do Meta por tipo de conversão', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '#,##0', showTitle: true, title: 'Leads do Meta por tipo de conversão', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 10.5, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: true, legendPos: 'b', legendColor: MUTED, legendFontSize: 10, legendFontFace: SANS,
     catAxisLabelColor: INK, catAxisLabelFontSize: 10, catAxisLabelFontFace: SANS,
@@ -466,7 +466,7 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M, y: 3.22, w: 7.3, h: 3.20,
     barDir: 'bar', barGapWidthPct: 40,
     chartColors: [PURPLE],
-    dataLabelFormatCode: '[$-416]#,##0.00', showTitle: true, title: 'Custo por lead por campanha — agosto', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '#,##0.00', showTitle: true, title: 'Custo por lead por campanha — agosto', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 9.5, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: false,
     catAxisLabelColor: INK, catAxisLabelFontSize: 9, catAxisLabelFontFace: SANS,
@@ -741,7 +741,7 @@ async function corrigirCategoriasDosGraficos(file) {
     }
   }
 
-  const buf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+  const buf = await zip.generateAsync({ type: 'nodebuffer', compression: 'STORE' });
   fs.writeFileSync(file, buf);
   return total;
 }

@@ -79,9 +79,17 @@ leem esse cache num eixo de nível único e caem no fallback numérico — o eix
 `<c:strRef>`/`<c:strCache>`, que é a forma que o próprio PowerPoint usa para categoria
 simples. Gráficos genuinamente multinível passariam intactos.
 
-Os rótulos de dado usam `[$-416]` no `formatCode` para fixar o padrão pt-BR (milhar com
-ponto, decimal com vírgula) independente do idioma do Office que abrir o arquivo. Sem
-`dataLabelFormatCode`, valores de CPL saem arredondados (R$ 39,03 vira `39`).
+Os rótulos de dado precisam de `dataLabelFormatCode` explícito: sem ele os valores de CPL
+saem arredondados (R$ 39,03 vira `39`). Use formato simples — `#,##0` e `#,##0.00`.
+
+**Não use prefixo de locale (`[$-416]`) no `formatCode`.** Ele passa no XSD e o LibreOffice
+renderiza normalmente, mas o PowerPoint entra em reparo ao abrir o arquivo e descarta os
+gráficos — os slides abrem sem eles. Com formato simples, um Office pt-BR já aplica milhar
+com ponto e decimal com vírgula sozinho.
+
+O patch do zip usa `compression: 'STORE'`, igual ao que o pptxgenjs grava, para que o pacote
+reescrito difira do original apenas no XML dos gráficos. Um round-trip do JSZip preserva
+ordem e bytes de todas as outras partes (verificado).
 
 ### QA visual
 
