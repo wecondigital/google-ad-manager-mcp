@@ -322,11 +322,11 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M, y: 3.58, w: 6.35, h: 2.92,
     barDir: 'col', barGapWidthPct: 55,
     chartColors: [SAGE, PURPLE],
-    showTitle: true, title: 'Leads por canal', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '[$-416]#,##0', showTitle: true, title: 'Leads por canal', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 10, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: true, legendPos: 'b', legendColor: MUTED, legendFontSize: 10, legendFontFace: SANS,
     catAxisLabelColor: INK, catAxisLabelFontSize: 10.5, catAxisLabelFontFace: SANS,
-    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9.5, valAxisLabelFontFace: SANS, valAxisMaxVal: 1750,
+    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9.5, valAxisLabelFontFace: SANS, valAxisMinVal: 0, valAxisMaxVal: 1750,
     valGridLine: { color: LINE, size: 0.75 }, catGridLine: { style: 'none' },
     plotArea: { fill: { color: CREAM } }, chartArea: { fill: { color: CREAM } },
   });
@@ -338,11 +338,11 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M + 6.55, y: 3.58, w: 5.28, h: 2.92,
     barDir: 'col', barGapWidthPct: 55,
     chartColors: [SAGE, PURPLE],
-    showTitle: true, title: 'Custo por lead (R$)', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '[$-416]#,##0.00', showTitle: true, title: 'Custo por lead (R$)', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 10, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: true, legendPos: 'b', legendColor: MUTED, legendFontSize: 10, legendFontFace: SANS,
     catAxisLabelColor: INK, catAxisLabelFontSize: 10.5, catAxisLabelFontFace: SANS,
-    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9.5, valAxisLabelFontFace: SANS, valAxisMaxVal: 48,
+    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9.5, valAxisLabelFontFace: SANS, valAxisMinVal: 0, valAxisMaxVal: 48,
     valGridLine: { color: LINE, size: 0.75 }, catGridLine: { style: 'none' },
     plotArea: { fill: { color: CREAM } }, chartArea: { fill: { color: CREAM } },
   });
@@ -391,11 +391,11 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M, y: 3.20, w: 6.9, h: 3.20,
     barDir: 'col', barGapWidthPct: 60,
     chartColors: [SAGE, PURPLE],
-    showTitle: true, title: 'Leads do Meta por tipo de conversão', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '[$-416]#,##0', showTitle: true, title: 'Leads do Meta por tipo de conversão', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 10.5, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: true, legendPos: 'b', legendColor: MUTED, legendFontSize: 10, legendFontFace: SANS,
     catAxisLabelColor: INK, catAxisLabelFontSize: 10, catAxisLabelFontFace: SANS,
-    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9.5, valAxisLabelFontFace: SANS, valAxisMaxVal: 850,
+    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9.5, valAxisLabelFontFace: SANS, valAxisMinVal: 0, valAxisMaxVal: 850,
     valGridLine: { color: LINE, size: 0.75 }, catGridLine: { style: 'none' },
     plotArea: { fill: { color: CREAM } }, chartArea: { fill: { color: CREAM } },
   });
@@ -466,11 +466,11 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
     x: M, y: 3.22, w: 7.3, h: 3.20,
     barDir: 'bar', barGapWidthPct: 40,
     chartColors: [PURPLE],
-    showTitle: true, title: 'Custo por lead por campanha — agosto', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
+    dataLabelFormatCode: '[$-416]#,##0.00', showTitle: true, title: 'Custo por lead por campanha — agosto', titleColor: INK, titleFontSize: 13, titleFontFace: SERIF, titleBold: true,
     showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: INK, dataLabelFontSize: 9.5, dataLabelFontBold: true, dataLabelFontFace: SANS,
     showLegend: false,
     catAxisLabelColor: INK, catAxisLabelFontSize: 9, catAxisLabelFontFace: SANS,
-    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9, valAxisLabelFontFace: SANS, valAxisMaxVal: 360,
+    valAxisLabelColor: MUTED, valAxisLabelFontSize: 9, valAxisLabelFontFace: SANS, valAxisMinVal: 0, valAxisMaxVal: 360,
     valGridLine: { color: LINE, size: 0.75 }, catGridLine: { style: 'none' },
     plotArea: { fill: { color: CREAM } }, chartArea: { fill: { color: CREAM } },
   });
@@ -704,5 +704,50 @@ pres.title = 'Di Terrá — Relatório de Mídia — Agosto 2026';
   });
 }
 
-pres.writeFile({ fileName: 'Di Terra - Relatorio de Midia - Agosto 2026.pptx' })
-  .then((f) => console.log('OK ->', f));
+// ---------------------------------------------------------------- correcao
+// O pptxgenjs grava TODA categoria de texto como <c:multiLvlStrRef> (referencia
+// multinivel), mesmo quando ha um unico nivel. PowerPoint, Google Slides e
+// LibreOffice nao leem esse cache num eixo de nivel unico e caem no fallback
+// numerico: o eixo aparece como 1, 2, 3 em vez dos nomes das categorias.
+// A forma correta para categoria simples e <c:strRef>/<c:strCache>, que e o que
+// o proprio PowerPoint escreve. Reescrevemos so os casos de um unico <c:lvl>;
+// um grafico realmente multinivel passa intacto.
+const SINGLE_LEVEL_CAT = new RegExp(
+  '<c:multiLvlStrRef>\\s*<c:f>(.*?)</c:f>\\s*<c:multiLvlStrCache>\\s*' +
+  '<c:ptCount val="(\\d+)"/>\\s*<c:lvl>(.*?)</c:lvl>\\s*' +
+  '</c:multiLvlStrCache>\\s*</c:multiLvlStrRef>',
+  'g');
+
+async function corrigirCategoriasDosGraficos(file) {
+  const fs = require('fs');
+  const JSZip = require('jszip');
+  const zip = await JSZip.loadAsync(fs.readFileSync(file));
+  const partes = Object.keys(zip.files).filter((n) => /^ppt\/charts\/chart\d+\.xml$/.test(n));
+  let total = 0;
+
+  for (const nome of partes) {
+    const xml = await zip.file(nome).async('string');
+    let n = 0;
+    const corrigido = xml.replace(SINGLE_LEVEL_CAT, (_m, f, ptCount, pts) => {
+      n++;
+      return `<c:strRef><c:f>${f}</c:f><c:strCache>` +
+             `<c:ptCount val="${ptCount}"/>${pts}` +
+             `</c:strCache></c:strRef>`;
+    });
+    if (n) {
+      zip.file(nome, corrigido);
+      total += n;
+      console.log(`   ${nome}: ${n} eixo(s) de categoria corrigido(s)`);
+    }
+  }
+
+  const buf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+  fs.writeFileSync(file, buf);
+  return total;
+}
+
+const ARQUIVO = 'Di Terra - Relatorio de Midia - Agosto 2026.pptx';
+pres.writeFile({ fileName: ARQUIVO })
+  .then((f) => corrigirCategoriasDosGraficos(f).then((n) => {
+    console.log(`OK -> ${f}  (${n} eixos de categoria reescritos para <c:strRef>)`);
+  }));

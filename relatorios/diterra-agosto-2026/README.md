@@ -64,16 +64,43 @@ quando ele estiver disponível.
 ## Regerar
 
 ```bash
-npm install                       # pptxgenjs + sharp
-node build.js                     # gera o .pptx
-python3 qa_render.py qa.pptx qa   # QA visual: renderiza cada slide e acusa estouros
+npm install                       # pptxgenjs + sharp + jszip
+node build.js                     # gera o .pptx e corrige o XML dos gráficos
 ```
 
 `dados.js` concentra todos os números — editar ali e rodar `node build.js` refaz o deck.
 
-`qa_render.py` existe porque o LibreOffice não carrega arquivos neste container
-(`Error: source file could not be loaded`), então o caminho normal de
-`soffice --convert-to pdf` + `pdftoppm` não funciona. Ele lê o `.pptx` com `python-pptx`
-e redesenha cada slide com PIL: aproxima o resultado, mas confere posição, sobreposição
-e estouro de texto sobre o arquivo real. Usa Liberation Sans/Serif, mais largas que
-Calibri/Cambria, então a checagem de estouro é conservadora.
+### Correção aplicada nos gráficos
+
+O pptxgenjs grava **toda** categoria de texto como `<c:multiLvlStrRef>` (referência
+multinível), mesmo quando há um único nível. PowerPoint, Google Slides e LibreOffice não
+leem esse cache num eixo de nível único e caem no fallback numérico — o eixo aparece como
+`1, 2, 3` em vez dos nomes das categorias. `build.js` reescreve essas referências para
+`<c:strRef>`/`<c:strCache>`, que é a forma que o próprio PowerPoint usa para categoria
+simples. Gráficos genuinamente multinível passariam intactos.
+
+Os rótulos de dado usam `[$-416]` no `formatCode` para fixar o padrão pt-BR (milhar com
+ponto, decimal com vírgula) independente do idioma do Office que abrir o arquivo. Sem
+`dataLabelFormatCode`, valores de CPL saem arredondados (R$ 39,03 vira `39`).
+
+### QA visual
+
+```bash
+# render fiel (requer libreoffice-impress instalado)
+python3 "$SKILL/scripts/office/soffice.py" --headless --convert-to pdf qa.pptx
+python3 -c "import pymupdf; d=pymupdf.open('qa.pdf'); [p.get_pixmap(dpi=110).save(f'render/slide-{i}.png') for i,p in enumerate(d,1)]"
+
+# checagem programática de layout, sem depender do LibreOffice
+python3 qa_render.py qa.pptx qa
+```
+
+Este container vinha só com `libreoffice-core` e `libreoffice-common` — sem
+`libreoffice-impress`, nenhum filtro de documento carrega e o `soffice` responde
+`Error: source file could not be loaded` até para um `.txt`. Resolver é
+`apt-get install libreoffice-impress fonts-crosextra-caladea fonts-crosextra-carlito`;
+as duas fontes são os substitutos com métrica idêntica a Cambria e Calibri, sem elas o
+render usa fontes mais largas e acusa estouro de texto que não existe.
+
+`qa_render.py` é o plano B: lê o `.pptx` com `python-pptx` e redesenha cada slide com PIL,
+acusando estouro de texto, shapes fora dos limites e células de tabela apertadas. É
+aproximado e não desenha gráficos nativos, mas roda sem LibreOffice.
