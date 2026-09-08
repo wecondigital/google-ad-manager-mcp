@@ -69,6 +69,7 @@ campanha com objetivos misturados e pode esconder lead real.
 | `coleta_periodo.py` | Google em duas janelas: o período pedido e o anterior de mesma duração. |
 | `normaliza_periodo.py` | `raw_periodo/*.json` (MCP) → `periodo_meta.json`. Reusa a regra de lead. |
 | `gera_periodo.js` | Relatório de mídia de um período, comparado com o anterior. |
+| `novos_anuncios.json` | As peças que estrearam no período, levantadas à mão (ver abaixo). |
 | `plano-setembro-2026.json` | O plano aprovado. Referência de verba e de CPL por casa. |
 | `tema/` | As três artes do "Tema Apresentação Wecon". |
 
@@ -118,10 +119,23 @@ node gera_periodo.js
 python3 qa_deck.py Relatorio-DiTerra-<de>-a-<ate>.pptx
 ```
 
-São 6 slides: capa, o período em números, Meta por campanha, Google por campanha,
-resultado por casa com as campanhas que estrearam, e o que falta do plano. A lista
-do último slide é escrita à mão no `gera_periodo.js` — atualize conforme os itens
-forem sendo concluídos.
+São 8 slides: capa, o período em números, Meta por campanha, Google por campanha,
+resultado por casa, novos anúncios, os criativos, e o que falta do plano. A lista do
+último slide é escrita à mão no `gera_periodo.js` — atualize conforme os itens forem
+sendo concluídos.
+
+### Os dois slides de criativo
+
+`novos_anuncios.json` alimenta os slides 6 e 7 e é montado à mão a cada rodada.
+Para levantar as peças novas, consulte `ads_get_ad_entities` no nível `ad` com
+`created_time` e `sort: created_time_descending`, e depois `ads_get_ad_preview`
+em cada anúncio para pegar o `preview_url`.
+
+**As molduras do slide 7 saem vazias de propósito.** O proxy de saída bloqueia
+`business.facebook.com` e os CDNs do Meta, então não dá para baixar o criativo e
+embutir a imagem no arquivo. As molduras já estão no tamanho certo (1,55 × 2,05 in):
+abra o preview pelo link, capture a tela e cole. Os links do Meta expiram — se algum
+não abrir, gere de novo com `ads_get_ad_preview`.
 
 ## Ao trocar de mês
 

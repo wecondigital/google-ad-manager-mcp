@@ -14,6 +14,7 @@ const ler = f => JSON.parse(fs.readFileSync(path.join(AQUI, f), 'utf8'));
 const G = ler('periodo_google.json');
 const M = ler('periodo_meta.json');
 const PLANO = ler('plano-setembro-2026.json');
+const NOVOS = ler('novos_anuncios.json').anuncios;
 
 const img = n => 'image/jpeg;base64,' +
   fs.readFileSync(path.join(AQUI, 'tema', `image${n}.jpg`)).toString('base64');
@@ -253,6 +254,70 @@ const COLW_CAMP = [3.0, 1.05, 1.05, 0.7, 1.0, 1.0, 1.0];
   }
   s.addNotes('Casas sem lead no período aparecem com CPL "—". A atribuição por casa usa o plano '
     + 'aprovado e, para campanha fora dele, o nome.');
+}
+
+// ==================== 6 · NOVOS ANÚNCIOS ====================
+{
+  const s = base('faixa');
+  const c = NOVOS.reduce((a, l) => a + l.custo, 0);
+  const n = NOVOS.reduce((a, l) => a + l.leads, 0);
+  titulo(s, 'CRIATIVO', 'Novos anúncios no ar', 'Seis peças estrearam entre 04 e 05/09 — nenhuma antes disso no período');
+  card(s, 0.6, 1.5, 2.15, 1.15, 'PEÇAS NOVAS', String(NOVOS.length), 'todas no Meta', OLIVA);
+  card(s, 2.92, 1.5, 2.15, 1.15, 'INVESTIDO', brl(c, 2),
+       `${num(c / 8481.02 * 100, 1)}% da verba do Meta`);
+  card(s, 5.24, 1.5, 2.15, 1.15, 'LEADS', String(n), 'no período');
+  card(s, 7.56, 1.5, 1.84, 1.15, 'CPL', brl(c / n, 2), 'contra R$ 64,25 da conta', BOM);
+
+  tabela(s, [{ t: 'ANÚNCIO' }, { t: 'CAMPANHA' }, { t: 'NO AR', a: 'center' },
+             { t: 'INVESTIDO', a: 'right' }, { t: 'LEADS', a: 'right' },
+             { t: 'CPL', a: 'right' }, { t: 'STATUS' }],
+    NOVOS.map(l => [
+      l.nome.length > 30 ? l.nome.slice(0, 29) + '…' : l.nome,
+      l.campanha.length > 28 ? l.campanha.slice(0, 27) + '…' : l.campanha,
+      dataBR(l.criado), brl(l.custo, 2), String(l.leads),
+      { t: l.leads ? brl(l.custo / l.leads, 2) : '—', b: true },
+      { t: l.status === 'ACTIVE' ? 'no ar' : l.status.toLowerCase(),
+        c: l.status === 'ACTIVE' ? BOM : RUIM },
+    ]),
+    { y: 2.9, w: 8.8, colW: [2.35, 2.2, 0.75, 1.1, 0.6, 0.9, 0.9], rowH: 0.25, fs: 9 });
+  rodape(s, 'As peças novas entregaram lead mais barato que a média do Meta no período. É leitura de 2 a 3 dias de veiculação: serve para decidir o que escalar, não para concluir desempenho.');
+  s.addNotes('AD01 - IMAGEM está com a campanha pausada. Vale confirmar se a pausa foi intencional, '
+    + 'porque foi a peça que carregou o criativo do Mês do Cliente.');
+}
+
+// ==================== 7 · OS CRIATIVOS ====================
+{
+  const s = base('estreito');
+  titulo(s, 'CRIATIVO', 'As peças que estrearam', 'Abra o preview para ver o anúncio como ele aparece no feed');
+  const destaque = [...NOVOS].sort((a, b) => b.custo - a.custo).slice(0, 3);
+  destaque.forEach((l, i) => {
+    const x = 0.6 + i * 2.55;
+    // moldura reservada para o print — o download do criativo é bloqueado
+    // pelo proxy de saida, entao a imagem entra manualmente
+    s.addShape(p.ShapeType.rect, { x, y: 1.45, w: 1.55, h: 2.05,
+      fill: { color: BRANCO }, line: { color: LINHA, width: 0.75, dashType: 'dash' } });
+    s.addText('cole aqui\no print', { x, y: 2.28, w: 1.55, h: 0.4, fontFace: F, fontSize: 9,
+      color: LINHA, align: 'center', valign: 'middle', margin: 0 });
+    s.addText(l.nome.length > 26 ? l.nome.slice(0, 25) + '…' : l.nome,
+      { x: x + 1.68, y: 1.45, w: 0.82, h: 0.5, fontFace: F, fontSize: 9.5, bold: true,
+        color: TINTA, margin: 0 });
+    s.addText([{ text: brl(l.custo, 2) + '\n', options: { bold: true, color: TINTA } },
+               { text: `${l.leads} lead${l.leads === 1 ? '' : 's'}\n`, options: { color: SEC } },
+               { text: l.leads ? 'CPL ' + brl(l.custo / l.leads, 2) : 'sem lead',
+                 options: { color: l.leads ? BOM : SEC } }],
+      { x: x + 1.68, y: 2.0, w: 0.82, h: 0.8, fontFace: F, fontSize: 9, margin: 0, lineSpacing: 11 });
+    s.addText(l.criativo, { x, y: 3.56, w: 2.25, h: 0.62, fontFace: F, fontSize: 8.5,
+      color: SEC, margin: 0, lineSpacing: 10.5 });
+    s.addText('abrir preview', { x, y: 4.2, w: 2.25, h: 0.2, fontFace: F, fontSize: 8.5,
+      color: GOOGLE, underline: true, hyperlink: { url: l.url }, margin: 0 });
+  });
+  s.addText([
+    { text: 'Por que a moldura está vazia.  ', options: { bold: true, color: TINTA } },
+    { text: 'O download do criativo é bloqueado nesta sessão. Os links acima abrem o preview '
+      + 'oficial: capture e cole na moldura, que já está no tamanho certo.', options: { color: SEC } },
+  ], { x: 0.6, y: 4.52, w: 7.4, h: 0.4, fontFace: F, fontSize: 9.5, margin: 0, lineSpacing: 12 });
+  s.addNotes('Os links de preview do Meta expiram depois de algum tempo. Se algum não abrir, '
+    + 'o anúncio pode ser visto direto no Gerenciador.');
 }
 
 // ==================== 6 · O QUE FALTA DO PLANO ====================
