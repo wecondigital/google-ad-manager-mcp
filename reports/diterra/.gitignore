@@ -2,6 +2,9 @@
 google.json
 meta.json
 google_depara.json
+periodo_google.json
+periodo_meta.json
+raw_periodo/
 raw/
 *.pptx
 node_modules/

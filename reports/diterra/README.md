@@ -66,11 +66,14 @@ campanha com objetivos misturados e pode esconder lead real.
 | `qa_deck.py` | QA geométrico: estouro de texto, sobreposição e margem. |
 | `coleta_google_depara.py` | Teto atual de cada campanha do Google → `google_depara.json`. |
 | `gera_status.js` | Deck de status da implementação (o que já mudou nas contas, o que falta). |
+| `coleta_periodo.py` | Google em duas janelas: o período pedido e o anterior de mesma duração. |
+| `normaliza_periodo.py` | `raw_periodo/*.json` (MCP) → `periodo_meta.json`. Reusa a regra de lead. |
+| `gera_periodo.js` | Relatório de mídia de um período, comparado com o anterior. |
 | `plano-setembro-2026.json` | O plano aprovado. Referência de verba e de CPL por casa. |
 | `tema/` | As três artes do "Tema Apresentação Wecon". |
 
-`google.json`, `meta.json`, `google_depara.json`, `raw/` e os `.pptx` gerados não
-são versionados — são saída de cada rodada.
+`google.json`, `meta.json`, `google_depara.json`, `periodo_*.json`, `raw/`,
+`raw_periodo/` e os `.pptx` gerados não são versionados — são saída de cada rodada.
 
 ## Os 5 slides do acompanhamento semanal
 
@@ -99,6 +102,26 @@ python3 qa_deck.py Implementacao-Setembro-DiTerra.pptx
 A lista `APLICADO` no topo do `gera_status.js` é o registro manual do que já foi
 mexido no Meta — atualize-a conforme aplicar mais alterações. O `PAUSADOS` é
 derivado dela, então o número em destaque do slide 2 acompanha sozinho.
+
+## Relatório de um período qualquer
+
+Para "relatório de X a Y", com comparativo automático contra os mesmos dias
+imediatamente anteriores:
+
+```bash
+python3 coleta_periodo.py --de 2026-08-31 --ate 2026-09-06
+# salve as duas janelas do Meta em raw_periodo/atual.json e raw_periodo/anterior.json
+# (mesma chamada ads_get_ad_entities da rotina de terça, com os time_range que o
+#  coleta_periodo.py imprimiu)
+python3 normaliza_periodo.py
+node gera_periodo.js
+python3 qa_deck.py Relatorio-DiTerra-<de>-a-<ate>.pptx
+```
+
+São 6 slides: capa, o período em números, Meta por campanha, Google por campanha,
+resultado por casa com as campanhas que estrearam, e o que falta do plano. A lista
+do último slide é escrita à mão no `gera_periodo.js` — atualize conforme os itens
+forem sendo concluídos.
 
 ## Ao trocar de mês
 
