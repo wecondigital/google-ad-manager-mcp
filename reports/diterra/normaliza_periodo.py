@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """Normaliza as duas janelas do Meta para o relatorio de periodo.
 
+Guarda o `id` de cada campanha: a conta renomeia campanhas de tempos em tempos
+(em 07/09 todas mudaram de nome), e comparar por nome faria cada uma aparecer
+como campanha nova. O id e o unico identificador estavel entre as janelas.
+
 Reaproveita a regra de lead do normaliza_meta — o `results` do Meta devolve o
 indicador do objetivo de cada campanha, e so alguns deles sao lead de verdade.
 
@@ -29,7 +33,8 @@ def main():
                 continue
             if custo > 0 and ind not in LEAD:
                 ignorados.setdefault(ind or "sem indicador", set()).add(x.get("name", "?"))
-            linhas.append({"campanha": x.get("name", "?"), "custo": round(custo, 2), "leads": n,
+            linhas.append({"id": str(x.get("id", "")),
+                           "campanha": x.get("name", "?"), "custo": round(custo, 2), "leads": n,
                            "impressoes": inteiro(x.get("impressions")),
                            "cliques": inteiro(x.get("clicks")),
                            "indicador": ind, "lead_contado": contou})

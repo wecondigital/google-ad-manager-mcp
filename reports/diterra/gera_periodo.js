@@ -64,8 +64,8 @@ const tA = total(ATU), tB = total(ANT);
 const ja = G.janelas.atual, jb = G.janelas.anterior;
 
 // campanhas que existem no período atual e não existiam no anterior
-const nomesAnt = new Set(ANT.map(l => l.campanha));
-const NOVAS = ATU.filter(l => !nomesAnt.has(l.campanha) && l.custo > 0);
+const chavesAnt = new Set(ANT.map(l => l.id || l.campanha));
+const NOVAS = ATU.filter(l => !chavesAnt.has(l.id || l.campanha) && l.custo > 0);
 
 const p = new pptxgen();
 p.layout = 'LAYOUT_16x9';
@@ -118,18 +118,26 @@ function rodape(s, txt) {
                    italic: true, color: SEC, margin: 0 });
 }
 
+// Casa a linha do periodo atual com a do anterior. No Meta a chave e o id da
+// campanha, porque os nomes mudam: em 07/09 a conta inteira foi renomeada e a
+// comparacao por nome marcaria tudo como campanha nova. No Google nao ha id na
+// coleta, entao o nome segue sendo a chave.
+const chave = l => l.id || l.campanha;
+
 // linhas de campanha comparadas com o periodo anterior
 function linhasComparadas(plataforma, limite) {
   const ant = {};
-  ANT.filter(l => l.plataforma === plataforma).forEach(l => { ant[l.campanha] = l; });
+  ANT.filter(l => l.plataforma === plataforma).forEach(l => { ant[chave(l)] = l; });
   return ATU.filter(l => l.plataforma === plataforma && l.custo > 0)
     .sort((a, b) => b.custo - a.custo).slice(0, limite)
     .map(l => {
-      const a = ant[l.campanha];
+      const a = ant[chave(l)];
       const c = l.leads ? l.custo / l.leads : 0;
       const ca = a && a.leads ? a.custo / a.leads : 0;
       const d = delta(c, ca, true);
-      return [l.campanha.length > 38 ? l.campanha.slice(0, 37) + '…' : l.campanha,
+      const renomeada = a && a.campanha !== l.campanha;
+      return [{ t: (l.campanha.length > 38 ? l.campanha.slice(0, 37) + '…' : l.campanha)
+                  + (renomeada ? '  ·  renomeada' : ''), c: TINTA },
               brl(l.custo, 2), a ? brl(a.custo, 2) : { t: 'nova', c: OLIVA },
               num(l.leads, l.leads % 1 ? 1 : 0),
               { t: l.leads ? brl(c, 2) : '—', b: true },
@@ -261,12 +269,14 @@ const COLW_CAMP = [3.0, 1.05, 1.05, 0.7, 1.0, 1.0, 1.0];
   const s = base('faixa');
   const c = NOVOS.reduce((a, l) => a + l.custo, 0);
   const n = NOVOS.reduce((a, l) => a + l.leads, 0);
-  titulo(s, 'CRIATIVO', 'Novos anúncios no ar', 'Seis peças estrearam entre 04 e 05/09 — nenhuma antes disso no período');
+  titulo(s, 'CRIATIVO', 'Novos anúncios no ar',
+    `${NOVOS.length} peças estrearam no período, todas no Meta`);
   card(s, 0.6, 1.5, 2.15, 1.15, 'PEÇAS NOVAS', String(NOVOS.length), 'todas no Meta', OLIVA);
   card(s, 2.92, 1.5, 2.15, 1.15, 'INVESTIDO', brl(c, 2),
-       `${num(c / 8481.02 * 100, 1)}% da verba do Meta`);
+       `${num(c / total(ATU.filter(l => l.plataforma === 'Meta')).custo * 100, 1)}% da verba do Meta`);
   card(s, 5.24, 1.5, 2.15, 1.15, 'LEADS', String(n), 'no período');
-  card(s, 7.56, 1.5, 1.84, 1.15, 'CPL', brl(c / n, 2), 'contra R$ 64,25 da conta', BOM);
+  card(s, 7.56, 1.5, 1.84, 1.15, 'CPL', brl(c / n, 2),
+       `contra ${brl(cpl(tA), 2)} da conta`, c / n < cpl(tA) ? BOM : RUIM);
 
   tabela(s, [{ t: 'ANÚNCIO' }, { t: 'CAMPANHA' }, { t: 'NO AR', a: 'center' },
              { t: 'INVESTIDO', a: 'right' }, { t: 'LEADS', a: 'right' },
@@ -280,9 +290,8 @@ const COLW_CAMP = [3.0, 1.05, 1.05, 0.7, 1.0, 1.0, 1.0];
         c: l.status === 'ACTIVE' ? BOM : RUIM },
     ]),
     { y: 2.9, w: 8.8, colW: [2.35, 2.2, 0.75, 1.1, 0.6, 0.9, 0.9], rowH: 0.25, fs: 9 });
-  rodape(s, 'As peças novas entregaram lead mais barato que a média do Meta no período. É leitura de 2 a 3 dias de veiculação: serve para decidir o que escalar, não para concluir desempenho.');
-  s.addNotes('AD01 - IMAGEM está com a campanha pausada. Vale confirmar se a pausa foi intencional, '
-    + 'porque foi a peça que carregou o criativo do Mês do Cliente.');
+  rodape(s, 'Leitura de poucos dias de veiculação: serve para decidir o que escalar, não para concluir desempenho. No Google não houve anúncio novo no período.');
+  s.addNotes('As peças do Mês do Cliente concentram o resultado da semana em debutantes.');
 }
 
 // ==================== 7 · OS CRIATIVOS ====================
@@ -326,7 +335,7 @@ const COLW_CAMP = [3.0, 1.05, 1.05, 0.7, 1.0, 1.0, 1.0];
   titulo(s, 'IMPLEMENTAÇÃO', 'O que falta do plano de setembro',
     'Levantado na conta — o plano ainda não está inteiro no ar');
   tabela(s, [{ t: '#' }, { t: 'O QUE FALTA' }, { t: 'ONDE' }, { t: 'QUEM' }], [
-    ['1', 'Ativar 4 entidades: Destination — Cópia (arquivada), Destination — SMS e 2 conjuntos do TERRÁ',
+    ['1', 'Ativar 4 entidades: Destination — Cópia (arquivada), Destination — SMS e 2 conjuntos do TERRÁ (R$ 25 e R$ 6/dia)',
      'Meta', { t: 'Di Terrá / WeCon', c: RUIM }],
     ['2', 'Aplicar os 7 orçamentos vitalícios (define o ritmo até dezembro)', 'Meta', 'Di Terrá'],
     ['3', 'Distribuir os tetos de [Leads Ads] R$ 80/dia e [Posts] R$ 30/dia', 'Meta', 'WeCon'],
@@ -337,7 +346,7 @@ const COLW_CAMP = [3.0, 1.05, 1.05, 0.7, 1.0, 1.0, 1.0];
     ['8', 'Revisar criativos de Palacete e Casa Lucca, que já receberam +22% e +30%', 'Meta e Google', 'WeCon'],
     ['9', 'Retorno do comercial sobre a qualidade dos leads de agosto', '—', 'Di Terrá'],
   ], { y: 1.45, w: 8.8, colW: [0.35, 5.15, 1.4, 1.9], rowH: 0.32, fs: 9.5 });
-  rodape(s, 'O item 1 é o mais urgente: R$ 3.540 do plano mensal não estão entregando enquanto essas quatro entidades seguem fora do ar.');
+  rodape(s, 'A campanha Social > Querência > Destination voltou ao ar em 07/09 e sozinha respondeu por 93 dos 297 leads do Meta. As outras quatro entidades seguem fora — item 1.');
   s.addNotes('Fechar a reunião definindo quem faz o item 1 e quando.');
 }
 

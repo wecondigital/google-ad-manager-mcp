@@ -70,6 +70,7 @@ campanha com objetivos misturados e pode esconder lead real.
 | `normaliza_periodo.py` | `raw_periodo/*.json` (MCP) → `periodo_meta.json`. Reusa a regra de lead. |
 | `gera_periodo.js` | Relatório de mídia de um período, comparado com o anterior. |
 | `novos_anuncios.json` | As peças que estrearam no período, levantadas à mão (ver abaixo). |
+| `exporta_pdf.sh` | Converte o `.pptx` em PDF (instala o Impress se faltar). |
 | `plano-setembro-2026.json` | O plano aprovado. Referência de verba e de CPL por casa. |
 | `tema/` | As três artes do "Tema Apresentação Wecon". |
 
@@ -117,7 +118,15 @@ python3 coleta_periodo.py --de 2026-08-31 --ate 2026-09-06
 python3 normaliza_periodo.py
 node gera_periodo.js
 python3 qa_deck.py Relatorio-DiTerra-<de>-a-<ate>.pptx
+./exporta_pdf.sh Relatorio-DiTerra-<de>-a-<ate>.pptx    # se quiser o PDF
 ```
+
+**A comparação casa por `id` de campanha, não por nome.** Em 07/09 a conta
+inteira foi renomeada (`CASAMENTOS | QUERÊNCIA | SITE` virou
+`Social > Casamento Querência > Leads`, e assim por diante); comparar por nome
+marcaria todas como campanha nova. Por isso o `raw_periodo/*.json` precisa trazer
+o campo `id` de cada campanha — o `ads_get_ad_entities` já devolve. A tabela
+marca "· renomeada" quando o nome mudou entre as duas janelas.
 
 São 8 slides: capa, o período em números, Meta por campanha, Google por campanha,
 resultado por casa, novos anúncios, os criativos, e o que falta do plano. A lista do
